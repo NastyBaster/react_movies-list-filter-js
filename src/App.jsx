@@ -6,9 +6,13 @@ import moviesFromServer from './api/movies.json';
 function getPreparedMovies(movies, query) {
   const normalizedQuery = query.toLowerCase().trim();
 
+  if (!normalizedQuery) {
+    return movies;
+  }
+
   return movies.filter(movie => {
     const titleMatch = movie.title.toLowerCase().includes(normalizedQuery);
-    const descriptionMatch = movie.description
+    const descriptionMatch = (movie.description || '')
       .toLowerCase()
       .includes(normalizedQuery);
 
